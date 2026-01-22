@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | EZPRIME LLC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --accent: #00f0ff; /* Cyan for tech feel */
+            --accent-secondary: #7000ff; /* Deep violet for depth */
+            --white: #ffffff;
+            --grid-line: rgba(255, 255, 255, 0.05);
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --padding-container: 5vw;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: center top;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem var(--padding-container);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid var(--grid-line);
+        }
+        
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--white);
+            letter-spacing: -0.02em;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* --- IMPRESSUM SPECIFIC STYLES --- */
+        main {
+            padding-top: 150px;
+            padding-bottom: 100px;
+            padding-left: var(--padding-container);
+            padding-right: var(--padding-container);
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Glow Effect Background */
+        main::before {
+            content: '';
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60vw;
+            height: 400px;
+            background: radial-gradient(circle, rgba(112, 0, 255, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .page-header {
+            margin-bottom: 4rem;
+            text-align: left;
+            border-left: 2px solid var(--accent);
+            padding-left: 2rem;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--accent);
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
+        /* Legal Grid Layout */
+        .legal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .legal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--grid-line);
+            padding: 2.5rem;
+            position: relative;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .legal-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .legal-card h3 {
+            font-family: var(--font-display);
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legal-card h3::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .data-row {
+            margin-bottom: 1rem;
+        }
+
+        .data-label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .data-value {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .data-value a {
+            color: var(--text-main);
+            text-decoration: none;
+            border-bottom: 1px solid var(--grid-line);
+            transition: all 0.2s;
+        }
+
+        .data-value a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Legal Text Content */
+        .legal-text {
+            border-top: 1px solid var(--grid-line);
+            padding-top: 3rem;
+        }
+
+        .legal-section {
+            margin-bottom: 3rem;
+        }
+
+        .legal-section h4 {
+            font-family: var(--font-display);
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .legal-section p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            max-width: 800px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-card);
+            padding: 6rem var(--padding-container) 2rem;
+            border-top: 1px solid var(--grid-line);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-info p {
+            color: var(--text-muted);
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-family: var(--font-display);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            border-top: 1px solid var(--grid-line);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links { display: none; } /* Mobile menu would go here in full implementation */
+            main { padding-top: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">EZPRIME<span>_</span></div>
+        <div class="nav-links">
+            <a href="index.html">Startseite</a>
+            <a href="ueber-uns.html">Über uns</a>
+            <a href="leistungen.html">Leistungen</a>
+            <a href="kontakt.html">Kontakt</a>
+            <a href="impressum.html" class="active">Impressum</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-header">
+            <div class="subtitle">Rechtliche Hinweise</div>
+            <h1>Impressum</h1>
+        </div>
+
+        <div class="legal-grid">
+            <!-- Company Information Card -->
+            <div class="legal-card">
+                <h3>Angaben gemäß § 5 TMG</h3>
+                
+                <div class="data-row">
+                    <span class="data-label">Firmenname</span>
+                    <div class="data-value">EZPRIME LLC</div>
+                </div>
+
+                <div class="data-row">
+                    <span class="data-label">Anschrift</span>
+                    <div class="data-value">
+                        2201 Menaul Blvd NE<br>
+                        87107 Albuquerque<br>
+                        USA
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact & Rep Card -->
+            <div class="legal-card">
+                <h3>Kontakt & Vertretung</h3>
+                
+                <div class="data-row">
+                    <span class="data-label">Vertretungsberechtigter Inhaber</span>
+                    <div class="data-value">M. Oezmen</div>
+                </div>
+
+                <div class="data-row">
+                    <span class="data-label">E-Mail Kontakt</span>
+                    <div class="data-value">
+                        <a href="mailto:info@ez-prime.org">info@ez-prime.org</a>
+                    </div>
+                </div>
+
+                <div class="data-row">
+                    <span class="data-label">Rechtsform</span>
+                    <div class="data-value">Limited Liability Company (LLC)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legal-text">
+            <div class="legal-section">
+                <h4>Haftung für Inhalte</h4>
+                <p>Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Wir sind jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.</p>
+            </div>
+
+            <div class="legal-section">
+                <h4>Haftung für Links</h4>
+                <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar.</p>
+            </div>
+
+            <div class="legal-section">
+                <h4>Urheberrecht</h4>
+                <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
+            </div>
+            
+            <div class="legal-section">
+                <h4>Hinweis zur Streitbeilegung</h4>
+                <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr.<br>
+                Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>EZPRIME LLC</h2>
+                <div class="footer-info">
+                    <p>2201 Menaul Blvd NE</p>
+                    <p>87107 Albuquerque</p>
+                    <br>
+                    <p><a href="mailto:info@ez-prime.org" style="color: var(--white);">info@ez-prime.org</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="leistungen.html">Leistungen</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 EZPRIME LLC. All rights reserved. Designed with precision.
+        </div>
+    </footer>
+
+</body>
+</html>

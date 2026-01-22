@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über uns | EZPRIME LLC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --accent: #00f0ff; /* Cyan for tech feel */
+            --accent-secondary: #7000ff; /* Deep violet for depth */
+            --white: #ffffff;
+            --grid-line: rgba(255, 255, 255, 0.05);
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --padding-container: 5vw;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem var(--padding-container);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.7);
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.05em;
+            color: var(--white);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* --- PAGE SPECIFIC STYLES --- */
+        
+        /* Background Grid Effect */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Hero Section */
+        .about-hero {
+            padding: 12rem var(--padding-container) 6rem;
+            position: relative;
+        }
+
+        .hero-label {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: var(--white);
+            max-width: 900px;
+        }
+
+        h1 .highlight {
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lead-text {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 4rem;
+        }
+
+        /* Split Section */
+        .split-section {
+            padding: 6rem var(--padding-container);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .split-image {
+            width: 100%;
+            height: 500px;
+            background: var(--bg-card);
+            border: 1px solid var(--grid-line);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .split-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.1), transparent 70%);
+        }
+
+        .code-block {
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+            padding: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .split-content h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .split-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Values Grid */
+        .values-section {
+            padding: 6rem var(--padding-container);
+            border-top: 1px solid var(--grid-line);
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--white);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border: 1px solid var(--grid-line);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .value-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Stats Strip */
+        .stats-strip {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 4rem var(--padding-container);
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.05), rgba(112, 0, 255, 0.05));
+            border-top: 1px solid var(--grid-line);
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            margin: 1rem 0;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-card);
+            padding: 6rem var(--padding-container) 2rem;
+            border-top: 1px solid var(--grid-line);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-family: var(--font-display);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid var(--grid-line);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .split-section {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none; /* Simplified for mobile demo */
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+
+    <nav>
+        <div class="logo">EZPRIME<span>_</span></div>
+        <div class="nav-links">
+            <a href="index.html">Startseite</a>
+            <a href="ueber-uns.html" class="active">Über uns</a>
+            <a href="leistungen.html">Leistungen</a>
+            <a href="kontakt.html">Kontakt</a>
+            <a href="impressum.html">Impressum</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="about-hero">
+            <span class="hero-label">01 // Wer wir sind</span>
+            <h1>Wir bauen nicht nur Websites.<br>Wir erschaffen <span class="highlight">digitale Ökosysteme</span>.</h1>
+            <p class="lead-text">
+                EZPRIME LLC ist ein Kollektiv aus Designern, Entwicklern und Strategen. Unser Ziel ist es, die Lücke zwischen visionärem Design und technischer Perfektion zu schließen.
+            </p>
+        </section>
+
+        <div class="stats-strip">
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Performance</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Support</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">NM</span>
+                <span class="stat-label">Based</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">∞</span>
+                <span class="stat-label">Skalierbar</span>
+            </div>
+        </div>
+
+        <section class="split-section">
+            <div class="split-content">
+                <h2>Unsere Philosophie</h2>
+                <p>In einer Welt voller Templates und Baukästen setzen wir auf Maßarbeit. Wir glauben daran, dass jede Marke eine einzigartige digitale Identität verdient, die nicht von den Einschränkungen eines CMS diktiert wird.</p>
+                <p>Von unserem Hauptsitz in Albuquerque aus arbeiten wir global. Wir verzichten bewusst auf aufgeblähte Prozesse und konzentrieren uns auf das Wesentliche: Sauberen Code, rasante Ladezeiten und ein Design, das im Gedächtnis bleibt.</p>
+                <p style="color: var(--white); font-weight: 600; margin-top: 2rem;">Kein Lorem Ipsum. Keine leeren Versprechen. Nur Ergebnisse.</p>
+            </div>
+            <div class="split-image">
+                <div class="code-block">
+                    &lt;class="EZPRIME"&gt;<br>
+                    &nbsp;&nbsp;.vision {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;future: active;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;limits: none;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;quality: 100%;<br>
+                    &nbsp;&nbsp;}<br>
+                    &lt;/class&gt;<br>
+                    <br>
+                    // Compiling success...<br>
+                    // Deploying to production...
+                </div>
+            </div>
+        </section>
+
+        <section class="values-section">
+            <div class="section-header">
+                <h2>Unsere Grundwerte</h2>
+            </div>
+            <div class="grid-3">
+                <div class="value-card">
+                    <div class="card-icon">01</div>
+                    <h3>Radikale Präzision</h3>
+                    <p>Pixel-Perfect ist für uns kein Modewort, sondern der Mindeststandard. Wir prüfen jedes Detail, von der Typografie bis zur Animation-Timing-Function.</p>
+                </div>
+                <div class="value-card">
+                    <div class="card-icon">02</div>
+                    <h3>Transparenz</h3>
+                    <p>Keine versteckten Kosten, kein Fachchinesisch. Wir kommunizieren klar, direkt und ehrlich über Machbarkeit, Zeitpläne und Budgets.</p>
+                </div>
+                <div class="value-card">
+                    <div class="card-icon">03</div>
+                    <h3>Zukunftssicherheit</h3>
+                    <p>Wir entwickeln mit modernen Standards (HTML5, CSS3, ES6+), die auch morgen noch relevant sind. Ihre Website wächst mit Ihrem Unternehmen.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>EZPRIME LLC</h2>
+                <div class="footer-info">
+                    <p>2201 Menaul Blvd NE</p>
+                    <p>87107 Albuquerque</p>
+                    <br>
+                    <p><a href="mailto:info@ez-prime.org" style="color: var(--white);">info@ez-prime.org</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="leistungen.html">Leistungen</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 EZPRIME LLC. All rights reserved. Designed with precision.
+        </div>
+    </footer>
+
+</body>
+</html>

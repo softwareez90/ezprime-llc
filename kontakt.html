@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | EZPRIME LLC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --accent: #00f0ff; /* Cyan for tech feel */
+            --accent-secondary: #7000ff; /* Deep violet for depth */
+            --white: #ffffff;
+            --grid-line: rgba(255, 255, 255, 0.05);
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --padding-container: 5vw;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-attachment: fixed;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem var(--padding-container);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.7);
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--white);
+            letter-spacing: -0.05em;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* --- PAGE CONTENT SPECIFIC --- */
+        .page-header {
+            padding: 180px var(--padding-container) 4rem;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        .contact-section {
+            padding: 2rem var(--padding-container) 8rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        /* Left Column: Info */
+        .contact-info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--grid-line);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+        }
+
+        .info-group {
+            margin-bottom: 3rem;
+        }
+
+        .info-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .info-value {
+            font-size: 1.25rem;
+            color: var(--white);
+            font-weight: 300;
+        }
+
+        .info-value a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .info-value a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Right Column: Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--grid-line);
+            padding: 1.2rem;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit {
+            background: var(--white);
+            color: var(--bg-dark);
+            border: none;
+            padding: 1.2rem 3rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn-submit:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+        }
+
+        /* Decorative Elements */
+        .glow-decoration {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--accent-secondary);
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: -1;
+            top: 20%;
+            right: 10%;
+            pointer-events: none;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-card);
+            padding: 6rem var(--padding-container) 2rem;
+            border-top: 1px solid var(--grid-line);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-info p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-family: var(--font-display);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            border-top: 1px solid var(--grid-line);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .contact-section {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">EZPRIME<span>_</span></div>
+        <div class="nav-links">
+            <a href="index.html">Startseite</a>
+            <a href="ueber-uns.html">Über uns</a>
+            <a href="leistungen.html">Leistungen</a>
+            <a href="kontakt.html" class="active">Kontakt</a>
+            <a href="impressum.html">Impressum</a>
+        </div>
+    </nav>
+
+    <div class="glow-decoration"></div>
+
+    <main>
+        <section class="page-header">
+            <h1>Projekt starten.<br>Zukunft gestalten.</h1>
+            <p>Sie haben eine Vision? Wir haben die Technologie, um sie Realität werden zu lassen. Kontaktieren Sie unser Team für eine unverbindliche Erstberatung.</p>
+        </section>
+
+        <section class="contact-section">
+            <!-- Left Column: Info -->
+            <div class="contact-info-wrapper">
+                <div class="contact-info-card">
+                    <div class="info-group">
+                        <span class="info-label">Hauptsitz</span>
+                        <div class="info-value">
+                            EZPRIME LLC<br>
+                            2201 Menaul Blvd NE<br>
+                            87107 Albuquerque<br>
+                            USA
+                        </div>
+                    </div>
+
+                    <div class="info-group">
+                        <span class="info-label">Digitale Kommunikation</span>
+                        <div class="info-value">
+                            <a href="mailto:info@ez-prime.org">info@ez-prime.org</a>
+                        </div>
+                    </div>
+
+                    <div class="info-group">
+                        <span class="info-label">Geschäftszeiten</span>
+                        <div class="info-value">
+                            Mo - Fr: 09:00 - 18:00 (MST)<br>
+                            Support: 24/7 via Ticket-System
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Form -->
+            <form class="contact-form" action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Ihr Name / Unternehmen</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="z.B. Max Mustermann" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-Mail Adresse</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="name@firma.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Betreff</label>
+                    <input type="text" id="subject" name="subject" class="form-control" placeholder="Projektanfrage: Webentwicklung" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Ihre Nachricht</label>
+                    <textarea id="message" name="message" class="form-control" placeholder="Erzählen Sie uns kurz von Ihrem Vorhaben..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Nachricht senden</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>EZPRIME LLC</h2>
+                <div class="footer-info">
+                    <p>2201 Menaul Blvd NE</p>
+                    <p>87107 Albuquerque</p>
+                    <br>
+                    <p><a href="mailto:info@ez-prime.org" style="color: var(--white); text-decoration: none;">info@ez-prime.org</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="leistungen.html">Leistungen</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 EZPRIME LLC. All rights reserved. Designed with precision.
+        </div>
+    </footer>
+
+</body>
+</html>

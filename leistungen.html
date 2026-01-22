@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leistungen | EZPRIME LLC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           DESIGN-SYSTEM
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --accent: #00f0ff; /* Cyan for tech feel */
+            --accent-secondary: #7000ff; /* Deep violet for depth */
+            --white: #ffffff;
+            --grid-line: rgba(255, 255, 255, 0.05);
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --padding-container: 5vw;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           NAVIGATION STYLES
+           ═══════════════════════════════════════════════════════════════ */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem var(--padding-container);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.05em;
+            color: var(--white);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           PAGE CONTENT STYLES
+           ═══════════════════════════════════════════════════════════════ */
+        
+        /* Hero Section */
+        .page-header {
+            padding: 12rem var(--padding-container) 4rem;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            max-width: 900px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--white), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-intro {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 4rem;
+        }
+
+        /* Services Grid */
+        .services-section {
+            padding: 2rem var(--padding-container) 8rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--grid-line);
+            padding: 3rem 2.5rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-number {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.03);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-weight: 700;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            color: var(--text-main);
+        }
+
+        /* Process Section */
+        .process-section {
+            padding: 6rem var(--padding-container);
+            border-top: 1px solid var(--grid-line);
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 4rem;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            counter-reset: process;
+        }
+
+        .step {
+            position: relative;
+        }
+
+        .step::before {
+            counter-increment: process;
+            content: "0" counter(process);
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--grid-line);
+            padding-bottom: 1rem;
+            width: 100%;
+        }
+
+        .step h4 {
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem var(--padding-container);
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--white);
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--white);
+            color: var(--bg-dark);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--white);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--white);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           FOOTER STYLES
+           ═══════════════════════════════════════════════════════════════ */
+        footer {
+            background-color: var(--bg-card);
+            padding: 6rem var(--padding-container) 2rem;
+            border-top: 1px solid var(--grid-line);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            border-top: 1px solid var(--grid-line);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Simplified for mobile view context */
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .page-header {
+                padding-top: 8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">EZPRIME<span>_</span></div>
+        <div class="nav-links">
+            <a href="index.html">Startseite</a>
+            <a href="ueber-uns.html">Über uns</a>
+            <a href="leistungen.html" class="active">Leistungen</a>
+            <a href="kontakt.html">Kontakt</a>
+            <a href="impressum.html">Impressum</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1>Digitale <span class="gradient-text">Exzellenz</span><br>ohne Kompromisse.</h1>
+        <p class="page-intro">
+            Wir entwickeln nicht einfach nur Websites. Wir erschaffen digitale Ökosysteme, die Ihre Marke stärken, Prozesse automatisieren und messbares Wachstum generieren.
+        </p>
+    </header>
+
+    <!-- SERVICES GRID -->
+    <section class="services-section">
+        <div class="services-grid">
+            
+            <!-- Service 1 -->
+            <article class="service-card">
+                <span class="card-number">01</span>
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                <h3>Web Development</h3>
+                <p>Maßgeschneiderte Frontend- und Backend-Entwicklung mit modernsten Frameworks. Sauberer Code, schnelle Ladezeiten und kompromisslose Sicherheit.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">WebGL</span>
+                </div>
+            </article>
+
+            <!-- Service 2 -->
+            <article class="service-card">
+                <span class="card-number">02</span>
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                <h3>UI/UX Design</h3>
+                <p>Nutzerzentriertes Design, das Ästhetik mit Funktionalität verbindet. Wir gestalten intuitive Interfaces, die Besucher zu loyalen Kunden konvertieren.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Figma</span>
+                    <span class="tech-tag">Prototyping</span>
+                    <span class="tech-tag">Design Systems</span>
+                </div>
+            </article>
+
+            <!-- Service 3 -->
+            <article class="service-card">
+                <span class="card-number">03</span>
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                <h3>E-Commerce</h3>
+                <p>Skalierbare Online-Shops, die verkaufen. Von der Produktpräsentation bis zum Checkout-Prozess optimieren wir jeden Schritt der Customer Journey.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Shopify Plus</span>
+                    <span class="tech-tag">WooCommerce</span>
+                    <span class="tech-tag">Headless</span>
+                </div>
+            </article>
+
+            <!-- Service 4 -->
+            <article class="service-card">
+                <span class="card-number">04</span>
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <h3>Performance & SEO</h3>
+                <p>Technische Suchmaschinenoptimierung und Core Web Vitals Optimierung. Wir sorgen dafür, dass Sie gefunden werden und Ihre Seite blitzschnell lädt.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Lighthouse 100</span>
+                    <span class="tech-tag">Technical SEO</span>
+                    <span class="tech-tag">Analytics</span>
+                </div>
+            </article>
+
+            <!-- Service 5 -->
+            <article class="service-card">
+                <span class="card-number">05</span>
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                <h3>Cloud & Hosting</h3>
+                <p>Sichere und skalierbare Infrastruktur für Ihre Anwendungen. Wir kümmern uns um Deployment, Wartung und 24/7 Monitoring.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">AWS</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">CI/CD</span>
+                </div>
+            </article>
+
+            <!-- Service 6 -->
+            <article class="service-card">
+                <span class="card-number">06</span>
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                <h3>Cybersecurity Audit</h3>
+                <p>Schutz Ihrer digitalen Assets. Wir analysieren Schwachstellen, implementieren SSL-Verschlüsselung und schützen vor DDoS-Angriffen.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Pen-Testing</span>
+                    <span class="tech-tag">DSGVO</span>
+                    <span class="tech-tag">Security Headers</span>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section class="process-section">
+        <h2 class="section-title">Unser Workflow</h2>
+        <div class="process-steps">
+            <div class="step">
+                <h4>Analyse & Strategie</h4>
+                <p>Wir tauchen tief in Ihr Geschäftsmodell ein, identifizieren Zielgruppen und definieren klare KPIs für den Projekterfolg.</p>
+            </div>
+            <div class="step">
+                <h4>Design & Entwicklung</h4>
+                <p>Agile Sprints sorgen für transparente Fortschritte. Wir verbinden High-End Design mit robuster Architektur.</p>
+            </div>
+            <div class="step">
+                <h4>Launch & Growth</h4>
+                <p>Nach strengem Testing erfolgt der Go-Live. Danach optimieren wir kontinuierlich basierend auf echten Nutzerdaten.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Bereit für das nächste Level?</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Lassen Sie uns über Ihr Projekt sprechen. Wir analysieren Ihre Anforderungen und erstellen ein individuelles Konzept.
+            </p>
+            <a href="kontakt.html" class="btn-primary">Projekt anfragen</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>EZPRIME LLC</h2>
+                <div class="footer-info">
+                    <p>2201 Menaul Blvd NE</p>
+                    <p>87107 Albuquerque</p>
+                    <br>
+                    <p><a href="mailto:info@ez-prime.org" style="color: var(--white);">info@ez-prime.org</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="leistungen.html">Leistungen</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 EZPRIME LLC. All rights reserved. Designed with precision.
+        </div>
+    </footer>
+
+</body>
+</html>

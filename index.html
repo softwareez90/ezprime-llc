@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZPRIME LLC | Strategic IT Advisory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --accent: #00f0ff; /* Cyan for tech feel */
+            --accent-secondary: #7000ff; /* Deep violet for depth */
+            --white: #ffffff;
+            --grid-line: rgba(255, 255, 255, 0.05);
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --padding-container: 5vw;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* --- BACKGROUND FX --- */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-size: 50px 50px;
+            background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                              linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(112,0,255,0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            z-index: -1;
+            filter: blur(50px);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem var(--padding-container);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.7);
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.05em;
+            color: var(--white);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 var(--padding-container);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero-label {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            border: 1px solid var(--accent);
+            padding: 0.5rem 1rem;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+
+        h1 .highlight {
+            -webkit-text-stroke: 1px var(--text-muted);
+            color: transparent;
+            transition: 0.5s;
+        }
+
+        h1:hover .highlight {
+            color: var(--accent-secondary);
+            -webkit-text-stroke: 0px;
+        }
+
+        .hero-text {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            border-left: 2px solid var(--accent-secondary);
+            padding-left: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--bg-dark);
+            padding: 1rem 2.5rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 8rem var(--padding-container);
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        /* --- BENTO GRID SERVICES --- */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .bento-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border: 1px solid var(--grid-line);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 350px;
+        }
+
+        .bento-card.large {
+            grid-column: span 2;
+        }
+
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .bento-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .bento-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- ABOUT / STATS --- */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item h3 {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .stat-item p {
+            color: var(--accent-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .text-block p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-card);
+            padding: 6rem var(--padding-container) 2rem;
+            border-top: 1px solid var(--grid-line);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-info {
+            color: var(--text-muted);
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-family: var(--font-display);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            border-top: 1px solid var(--grid-line);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 900px) {
+            .bento-card.large {
+                grid-column: span 1;
+            }
+            .split-layout {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .nav-links {
+                display: none; /* Simple hide for this demo, would use hamburger in full prod */
+            }
+            h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-grid"></div>
+    <div class="glow-orb"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">EZPRIME<span>_</span></div>
+        <div class="nav-links">
+            <a href="index.html">Startseite</a>
+            <a href="ueber-uns.html">Über uns</a>
+            <a href="leistungen.html">Leistungen</a>
+            <a href="kontakt.html">Kontakt</a>
+            <a href="impressum.html">Impressum</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header>
+        <div class="hero-content">
+            <span class="hero-label">Strategic Intelligence</span>
+            <h1>
+                Architecting the <br>
+                <span class="highlight">Future of Code.</span>
+            </h1>
+            <p class="hero-text">
+                EZPRIME delivers high-velocity software consulting and IT advisory services. We bridge the gap between complex technical challenges and sustainable business growth.
+            </p>
+            <a href="kontakt.html" class="cta-btn">Initialize Project</a>
+        </div>
+    </header>
+
+    <!-- Services Bento Grid -->
+    <section id="services">
+        <div class="section-header">
+            <h2 class="section-title">Core Capabilities</h2>
+            <p style="color: var(--text-muted); max-width: 400px; text-align: right;">
+                Tailored solutions for enterprise scalability. We don't just patch software; we re-engineer your digital DNA.
+            </p>
+        </div>
+
+        <div class="bento-grid">
+            <div class="bento-card large">
+                <div class="card-icon">01.</div>
+                <div>
+                    <h3 class="card-title">Digital Transformation Strategy</h3>
+                    <p class="card-desc">Comprehensive roadmapping for legacy modernization. We analyze your current stack and architect a path to cloud-native efficiency.</p>
+                </div>
+            </div>
+            
+            <div class="bento-card">
+                <div class="card-icon">02.</div>
+                <div>
+                    <h3 class="card-title">Software Architecture</h3>
+                    <p class="card-desc">Building resilient, scalable back-end systems designed for high-load environments.</p>
+                </div>
+            </div>
+
+            <div class="bento-card">
+                <div class="card-icon">03.</div>
+                <div>
+                    <h3 class="card-title">IT Advisory</h3>
+                    <p class="card-desc">Vendor selection, fractional CTO services, and technical due diligence for M&A.</p>
+                </div>
+            </div>
+
+            <div class="bento-card">
+                <div class="card-icon">04.</div>
+                <div>
+                    <h3 class="card-title">Cyber Resilience</h3>
+                    <p class="card-desc">Proactive security protocols and compliance frameworks integrated into the dev lifecycle.</p>
+                </div>
+            </div>
+
+            <div class="bento-card large" style="background: var(--accent-secondary); border: none;">
+                <div class="card-icon" style="color: var(--white);">05.</div>
+                <div>
+                    <h3 class="card-title">DevOps Automation</h3>
+                    <p class="card-desc" style="color: rgba(255,255,255,0.8);">Streamlining deployment pipelines (CI/CD) to reduce time-to-market by up to 60%. We automate the boring stuff so you can focus on innovation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Approach Section -->
+    <section id="about">
+        <div class="split-layout">
+            <div class="text-block">
+                <span class="hero-label" style="border-color: var(--text-muted); color: var(--text-muted);">The EZPRIME Ethos</span>
+                <h2 class="section-title" style="margin: 1.5rem 0;">Precision over<br>Guesswork.</h2>
+                <p>
+                    In an industry flooded with buzzwords, EZPRIME stands for technical rigor. We are a collective of senior engineers and strategists located in Albuquerque, serving a global clientele.
+                </p>
+                <p>
+                    We believe that true IT advisory isn't about selling software; it's about solving fundamental business logic problems through elegant code and robust infrastructure.
+                </p>
+                <a href="ueber-uns.html" style="color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px;">Learn more about our team &rarr;</a>
+            </div>
+            <div class="stats-block">
+                <div class="stat-row">
+                    <div class="stat-item">
+                        <h3>10+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>100%</h3>
+                        <p>Uptime Focus</p>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>Monitoring Logic</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>EZPRIME LLC</h2>
+                <div class="footer-info">
+                    <p>2201 Menaul Blvd NE</p>
+                    <p>87107 Albuquerque</p>
+                    <br>
+                    <p><a href="mailto:info@ez-prime.org" style="color: var(--white);">info@ez-prime.org</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="leistungen.html">Leistungen</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 EZPRIME LLC. All rights reserved. Designed with precision.
+        </div>
+    </footer>
+
+    <script>
+        // Simple subtle mouse tracking effect for cards
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.onmousemove = e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            }
+        });
+    </script>
+</body>
+</html>
